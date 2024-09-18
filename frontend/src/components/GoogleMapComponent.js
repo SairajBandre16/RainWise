@@ -94,9 +94,9 @@ const GoogleMapComponent = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto">
       <div className="text-center py-6">
-        <h1 className="text-3xl font-bold text-blue-600">RainWise: Plot Your Area</h1>
+        <h1 className="text-2xl font-bold text-blue-600">RainWise: Plot Your Area</h1>
         <p className="text-gray-600">Click on the map to select two corners of your rectangle.</p>
       </div>
 
