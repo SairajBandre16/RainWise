@@ -1,15 +1,11 @@
 const express = require('express');
-const axios = require('axios');
 const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
 
-// Google Maps API Key
-const GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY';
-
-// Route to calculate area based on coordinates (using Google Maps API)
-app.post('/api/v1/area', async (req, res) => {
+// Route to calculate area based on coordinates
+app.post('/api/v1/area', (req, res) => {
     const { coordinates } = req.body;
 
     if (!coordinates || coordinates.length < 3) {
@@ -17,25 +13,19 @@ app.post('/api/v1/area', async (req, res) => {
     }
 
     try {
-        const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates[0].lat},${coordinates[0].lng}&key=${GOOGLE_MAPS_API_KEY}`);
+        const area = calculatePolygonArea(coordinates);
 
-        if (response.data.status === 'OK') {
-            return res.json({
-                area: calculatePolygonArea(coordinates), // Use some formula to calculate area
-                location: response.data.results[0].formatted_address,
-            });
-        } else {
-            res.status(500).json({ message: 'Error fetching area data from Google Maps API' });
-        }
+        res.json({
+            area: area, // Use some formula to calculate area
+            location: 'Location data not fetched' // No geocoding API call for now
+        });
     } catch (error) {
-        res.status(500).json({ message: 'Server Error', error: error.message });
+        res.status(500).json({ message: 'Error calculating area', error: error.message });
     }
 });
 
 function calculatePolygonArea(coordinates) {
-    // Radius of Earth in kilometers
-    const R = 6371;
-    
+    const R = 6371; // Radius of Earth in kilometers
     let area = 0;
     const len = coordinates.length;
 
@@ -53,17 +43,15 @@ function calculatePolygonArea(coordinates) {
     return Math.abs(area); // Return absolute value in km²
 }
 
-// Helper function to convert degrees to radians
 function degToRad(deg) {
     return deg * (Math.PI / 180);
 }
-
 
 // Rainfall Prediction (Mocked ML integration)
 app.post('/api/v1/rainfall-prediction', (req, res) => {
     const { latitude, longitude, month } = req.body;
 
-    if (!latitude || !longitude || !month) {
+    if (latitude === undefined || longitude === undefined || month === undefined) {
         return res.status(400).json({ message: 'Latitude, longitude, and month are required' });
     }
 
@@ -81,7 +69,7 @@ app.post('/api/v1/rainfall-prediction', (req, res) => {
 app.post('/api/v1/water-demand', (req, res) => {
     const { population, area_size } = req.body;
 
-    if (!population || !area_size) {
+    if (population === undefined || area_size === undefined) {
         return res.status(400).json({ message: 'Population and area size are required' });
     }
 
@@ -94,7 +82,6 @@ app.post('/api/v1/water-demand', (req, res) => {
         predicted_water_demand: waterDemand // Output of the model (mocked)
     });
 });
-
 
 // Start the server
 const PORT = process.env.PORT || 5000;
