@@ -21,7 +21,7 @@ app.post('/api/v1/calculate', (req, res) => {
     const area = turf.area(polygon); // Area in square meters
 
     // Convert area from square meters to square kilometers
-    const areaInKm2 = area / 1000000;
+   // const areaInKm2 = area / 1000000;
 
     // Get coordinates for the center of the polygon
     const center = turf.center(polygon).geometry.coordinates;
@@ -35,10 +35,10 @@ app.post('/api/v1/calculate', (req, res) => {
         const predictedRainfall = parseFloat(flaskResponse.data.predicted_rainfall); // Parse the rainfall prediction
 
         // Predict Water Demand
-        const waterDemand = population * areaInKm2 * 0.05; // Mock calculation
+        const waterDemand = (predictedRainfall * area) / population; 
 
         res.json({
-            area: areaInKm2, // Area in km²
+            area: area, // Area in m²
             predicted_rainfall: predictedRainfall,
             predicted_water_demand: waterDemand
         });
