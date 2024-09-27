@@ -69,7 +69,7 @@ const HomePage = () => {
           <div className="bg-white rounded-lg shadow-lg p-6 w-full md:w-1/3">
             <h3 className="text-2xl font-semibold text-blue-900 mb-4">Calculated Area</h3>
             <p className="text-lg text-gray-700">
-              {loading ? 'Calculating...' : (area !== null ? `${area.toFixed(2)} km²` : 'Area will be displayed here.')}
+              {loading ? 'Calculating...' : (area !== null ? `${area.toFixed(2)} m²` : 'Area will be displayed here.')}
             </p>
           </div>
 
