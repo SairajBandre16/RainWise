@@ -1,0 +1,17 @@
+2024-09-20 15:43:02,241 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2024-09-20 15:43:02,241 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-20 15:43:41,064 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2024-09-20 15:43:41,065 - INFO - [33mPress CTRL+C to quit[0m
+2024-09-20 15:43:47,007 - INFO - Received request data: {'lat': 37.7749, 'lon': -122.4194}
+2024-09-20 15:43:47,007 - ERROR - Error in /predict_rainfall endpoint: [Errno 2] Unable to synchronously open file (unable to open file: name = '/model/rainfall_model.h5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+2024-09-20 15:43:47,008 - INFO - 127.0.0.1 - - [20/Sep/2024 15:43:47] "[35m[1mPOST /predict_rainfall HTTP/1.1[0m" 500 -
+2024-09-20 15:43:47,851 - INFO - Received request data: {'lat': 37.7749, 'lon': -122.4194}
+2024-09-20 15:43:47,851 - ERROR - Error in /predict_rainfall endpoint: [Errno 2] Unable to synchronously open file (unable to open file: name = '/model/rainfall_model.h5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+2024-09-20 15:43:47,851 - INFO - 127.0.0.1 - - [20/Sep/2024 15:43:47] "[35m[1mPOST /predict_rainfall HTTP/1.1[0m" 500 -
+2024-09-20 15:43:48,444 - INFO - Received request data: {'lat': 37.7749, 'lon': -122.4194}
+2024-09-20 15:43:48,444 - ERROR - Error in /predict_rainfall endpoint: [Errno 2] Unable to synchronously open file (unable to open file: name = '/model/rainfall_model.h5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+2024-09-20 15:43:48,446 - INFO - 127.0.0.1 - - [20/Sep/2024 15:43:48] "[35m[1mPOST /predict_rainfall HTTP/1.1[0m" 500 -
+2024-09-20 15:44:13,837 - INFO - 127.0.0.1 - - [20/Sep/2024 15:44:13] "[33mGET / HTTP/1.1[0m" 404 -
+2024-09-20 15:44:13,876 - INFO - 127.0.0.1 - - [20/Sep/2024 15:44:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -

@@ -18,7 +18,7 @@ const GoogleMapComponent = ({ calculateAreaAndWaterCapacity }) => {
 
   // Handle click event to add markers and create a polygon
   const handleMapClick = useCallback((event) => {
-    const newLatLng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
+    const newLatLng = { lng: event.latLng.lng(), lat: event.latLng.lat()};
     setPolygon((prevPolygon) => [...prevPolygon, newLatLng]);
   }, []);
 

@@ -14,23 +14,31 @@ const HomePage = () => {
       alert('Please plot at least 3 points for a polygon');
       return;
     }
-
+  
+    // Ensure the polygon is closed
+    if (coordinates[0].lat !== coordinates[coordinates.length - 1].lat ||
+        coordinates[0].lng !== coordinates[coordinates.length - 1].lng) {
+      coordinates.push({ lng: coordinates[0].lng,lat: coordinates[0].lat }); // Closing the polygon
+    }
+  
     setLoading(true);
-
+  
     try {
-      // Call backend to calculate area and water capacity
       const response = await axios.post('http://localhost:5000/api/v1/calculate', { coordinates, population });
       const { area, predicted_rainfall, predicted_water_demand } = response.data;
-
+      console.log(coordinates);
+      console.log(response.data);
       setArea(typeof area === 'number' ? area : null);
       setPredictedRainfall(predicted_rainfall);
       setWaterCapacity(predicted_water_demand);
     } catch (error) {
-      console.error('Error calculating area, rainfall, or water capacity:', error);
+      console.error('Error calculating area, rainfall, or water capacity:', error.response ? error.response.data : error.message);
     }
-
+  
     setLoading(false);
   };
+  
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-200 to-blue-400 w-screen">
